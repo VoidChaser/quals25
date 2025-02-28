@@ -9,8 +9,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Meditation" >
-
+        android:theme="@style/Theme.Meditation">
+        <activity
+            android:name=".VideoPlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AudioPlayerActivity"
+            android:exported="false" />
         <activity
             android:name=".Profile"
             android:exported="false" />

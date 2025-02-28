@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/onboarding_logo"
         android:layout_width="332dp"
         android:layout_height="329dp"
         app:layout_constraintBottom_toTopOf="@+id/greet_text"
