@@ -35,10 +35,12 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/logoImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="81dp"
+            android:layout_height="83dp"
             android:layout_weight="1"
             android:background="#00FFFFFF"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             android:textDirection="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/avatarButton"
@@ -111,7 +113,7 @@
             android:id="@+id/calmLabel2"
             android:layout_width="wrap_content"
             android:layout_height="20sp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:text="Расслабленным"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -119,14 +121,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/calmLabel"
             app:layout_constraintTop_toBottomOf="@+id/relax_mood_button"
-            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintVertical_bias="0.2"
             tools:ignore="SmallSp" />
 
         <TextView
             android:id="@+id/calmLabel3"
             android:layout_width="wrap_content"
             android:layout_height="20sp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="Сосредоточеным"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -134,7 +136,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/calmLabel5"
             app:layout_constraintTop_toBottomOf="@+id/focus_mood_button"
-            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintVertical_bias="0.2"
             tools:ignore="SmallSp" />
 
         <TextView
