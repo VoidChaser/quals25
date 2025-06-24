@@ -11,25 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Meditation">
         <activity
-            android:name=".VideoPlayerActivity"
+            android:name=".CounterActivity"
             android:exported="false" />
         <activity
-            android:name=".AudioPlayerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Profile"
+            android:name=".RandomNumberActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
-            android:exported="false" />
-        <activity
-            android:name=".EmptyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Onboarding"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +25,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".VideoPlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

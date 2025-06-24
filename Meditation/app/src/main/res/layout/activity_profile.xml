@@ -1,231 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/profile_background"
-    tools:context=".Profile">
+    android:background="@color/bgbgcolor"
+    android:padding="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/botPanel"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!-- ImageView для выбора картинки -->
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="187dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/torquoise"
+        android:contentDescription="Выберите аватар"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/menuButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:alpha=".5"
-            android:background="@drawable/registration_logo"
-            android:textDirection="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/musicButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/musicButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/sound"
-            android:textDirection="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.555" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/profileButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/user_enable"
-            android:textDirection="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/musicButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topPanel"
-        android:layout_width="match_parent"
-        android:layout_height="115dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/settingsButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/hambugir"
-            android:textDirection="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/logoImage"
-            app:layout_constraintHorizontal_bias="0.3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.492" />
+    <!-- Имя -->
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/nameform"
+        android:textStyle="bold"
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/logoImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:textDirection="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.492"
-            app:srcCompat="@drawable/registration_logo"
-            tools:ignore="MissingConstraints" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/exitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:backgroundTint="#00FFFFFF"
-            android:outlineAmbientShadowColor="#00FFFFFF"
-            android:outlineSpotShadowColor="#000F0000"
-            android:shadowColor="#00FFFFFF"
-            android:text="ВЫЙТИ"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/logoImage"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.507" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/profileLayout"
-        android:layout_width="match_parent"
-        android:layout_height="218dp"
-        android:orientation="vertical"
+        android:hint="    Имя"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topPanel">
+        app:layout_constraintTop_toBottomOf="@id/avatarImageView" />
 
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="189dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.085"
-            app:srcCompat="@drawable/avatar" />
+    <!-- Ник -->
+    <EditText
+        android:id="@+id/inputNickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
 
-        <TextView
-            android:id="@+id/userNameLabel"
-            android:layout_width="181dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:text="Эмиль"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textColorLink="#FFFFFF"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar"
-            tools:ignore="MissingConstraints" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/midPanel"
-        android:layout_width="match_parent"
-        android:layout_height="459dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/botPanel"
+        android:background="@drawable/nameform"
+        android:hint="    Ник"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileLayout">
+        app:layout_constraintTop_toBottomOf="@id/inputName" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mid_plus"
-            android:layout_width="174dp"
-            android:layout_height="132dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:textDirection="1"
-            android:background="@drawable/mid_plus"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mid_pic_4"
-            app:layout_constraintVertical_bias="0.0" />
+    <!-- Дата рождения (будет неактивный EditText с кликом) -->
+    <EditText
+        android:id="@+id/inputBirthDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mid_pic_4"
-            android:layout_width="174dp"
-            android:layout_height="132dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:textDirection="1"
-            android:background="@drawable/sunset_profile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mid_pic_1" />
+        android:textStyle="bold"
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mid_pic_3"
-            android:layout_width="174dp"
-            android:layout_height="132dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:textDirection="1"
-            android:background="@drawable/fire_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mid_pic_2" />
+        android:background="@drawable/nameform"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="    Дата рождения"
+        android:inputType="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputNickname" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mid_pic_1"
-            android:layout_width="174dp"
-            android:layout_height="132dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="21dp"
-            android:layout_weight="1"
-            android:textDirection="1"
-            android:background="@drawable/sunrise_profile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- Email -->
+    <EditText
+        android:id="@+id/inputEmail"
+        android:layout_width="0dp"
+        android:textStyle="bold"
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mid_pic_2"
-            android:layout_width="174dp"
-            android:layout_height="132dp"
-            android:layout_marginTop="21dp"
-            android:layout_marginEnd="21dp"
-            android:layout_weight="1"
-            android:textDirection="1"
-            android:background="@drawable/moon_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/nameform"
+        android:fontFamily=""
+        android:hint="    Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputBirthDate" />
+
+    <!-- Кнопка сохранить -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="100px"
+        android:background="@drawable/ontwo"
+        android:text="Сохранить"
+        android:textStyle="italic"
+
+
+        android:textColorLink="#1CD9C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

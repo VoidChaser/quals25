@@ -15,17 +15,18 @@ import androidx.core.content.ContextCompat
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
+import androidx.appcompat.widget.AppCompatButton
 class VideoPlayerActivity : AppCompatActivity(), SurfaceHolder.Callback {
-
+    private val videoFileName = "video1.mp4"
     private lateinit var surfaceView: SurfaceView
     private var mediaPlayer: MediaPlayer? = null
     private var videoPath: String? = null
     private lateinit var seekBar: SeekBar
     private lateinit var textViewCurrentTime: TextView
     private lateinit var textViewTotalTime: TextView
-    private lateinit var buttonPlay: Button
-    private lateinit var buttonPause: Button
-    private lateinit var buttonStop: Button
+    private lateinit var buttonPlay: AppCompatButton
+    private lateinit var buttonPause: AppCompatButton
+    private lateinit var buttonStop: AppCompatButton
     private lateinit var textViewTitle: TextView
     private var handler = Handler()
     private var runnable: Runnable? = null
@@ -51,10 +52,11 @@ class VideoPlayerActivity : AppCompatActivity(), SurfaceHolder.Callback {
 
 
         surfaceView.holder.addCallback(this)
-
         videoPath = intent.getStringExtra("videoPath")
-        val videoName = videoPath?.substringBeforeLast(".") ?: "Без названия" // Получаем имя файла без расширения
-        textViewTitle.text = "Видеоплеер: $videoName"
+
+//        val videoName = videoPath?.substringBeforeLast(".") ?: "Без названия" // Получаем имя файла без расширения
+//        textViewTitle.text = "Видеоплеер: $videoName"
+        textViewTitle.text = "Видео"
 
 
         buttonPlay.setOnClickListener {
@@ -82,36 +84,35 @@ class VideoPlayerActivity : AppCompatActivity(), SurfaceHolder.Callback {
         try {
             mediaPlayer = MediaPlayer()
             mediaPlayer?.setDisplay(holder)
-            val assetFileDescriptor = assets.openFd(videoPath!!) //videoPath не может быть null
-            mediaPlayer?.setDataSource(
-                assetFileDescriptor.fileDescriptor,
-                assetFileDescriptor.startOffset,
-                assetFileDescriptor.length
-            )
+
+            val afd = assets.openFd(videoFileName)
+            mediaPlayer?.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+            afd.close()
+
             mediaPlayer?.prepare()
 
             val duration = mediaPlayer?.duration ?: 0
             textViewTotalTime.text = millisecondsToTimer(duration.toLong())
             seekBar.max = duration
 
-
             mediaPlayer?.setOnPreparedListener { mp ->
-                mp.start()
+                // Видео не стартует сразу
                 updateSeekBar()
                 updateButtonUI()
             }
+
             mediaPlayer?.setOnCompletionListener {
                 stopPlayback()
                 finish()
             }
-
-
         } catch (e: IOException) {
             e.printStackTrace()
             Toast.makeText(this, "Ошибка открытия видеофайла: ${e.message}", Toast.LENGTH_LONG).show()
             finish()
         }
     }
+
+
 
     private fun updateSeekBar() {
         runnable = Runnable {
