@@ -13,7 +13,11 @@ captures/
 .externalNativeBuild/
 .cxx/
 *.apk
+<<<<<<< HEAD
 output.json
+=======
+output-metadata.json
+>>>>>>> 7478e1f9f009b914095d9186e62052cd47427ff5
 
 # IntelliJ
 *.iml
