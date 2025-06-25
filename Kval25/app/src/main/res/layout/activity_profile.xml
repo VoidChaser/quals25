@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgbgcolor"
+    android:padding="16dp">
+
+    <!-- ImageView для выбора картинки -->
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="187dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/torquoise"
+        android:contentDescription="Выберите аватар"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Имя -->
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/nameform"
+        android:textStyle="bold"
+
+        android:hint="    Имя"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatarImageView" />
+
+    <!-- Ник -->
+    <EditText
+        android:id="@+id/inputNickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
+
+        android:background="@drawable/nameform"
+        android:hint="    Ник"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputName" />
+
+    <!-- Дата рождения (будет неактивный EditText с кликом) -->
+    <EditText
+        android:id="@+id/inputBirthDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+
+        android:textStyle="bold"
+
+        android:background="@drawable/nameform"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="    Дата рождения"
+        android:inputType="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputNickname" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/inputEmail"
+        android:layout_width="0dp"
+        android:textStyle="bold"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/nameform"
+        android:fontFamily=""
+        android:hint="    Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputBirthDate" />
+
+    <!-- Кнопка сохранить -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="100px"
+        android:background="@drawable/ontwo"
+        android:text="Сохранить"
+        android:textStyle="italic"
+
+
+        android:textColorLink="#1CD9C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputEmail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
