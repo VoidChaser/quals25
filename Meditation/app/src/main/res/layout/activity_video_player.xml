@@ -1,98 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgbgcolor"
-    android:padding="16dp"
-    tools:context=".VideoPlayerActivity">
+    android:padding="24dp">
+
+    <!-- Видео блок -->
+
+    <!-- Аудио блок -->
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/videoLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/rubik_wet_paint"
         android:text="Видео"
-        android:textSize="24sp"
         android:textColor="@color/white"
-        android:textStyle="bold"
+        android:textSize="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SurfaceView
-        android:id="@+id/surfaceView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintDimensionRatio="H,16:9"
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="371dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surfaceView" />
+        app:layout_constraintTop_toBottomOf="@id/videoLabel" />
 
     <TextView
-        android:id="@+id/textViewCurrentTime"
+        android:id="@+id/audioLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="0:00"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
-
-    <TextView
-        android:id="@+id/textViewTotalTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="0:00"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/rubik_wet_paint"
+        android:text="Аудио"
+        android:textColor="@color/white"
+        android:textSize="44dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/videoView" />
+
+    <!-- Блок кнопок управления аудио -->
+    <ProgressBar
+        android:id="@+id/audioProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/audioLabel" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutButtons"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentTime"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/audioProgressBar">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonPlay"
-            android:layout_width="176dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/playButton"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
             android:background="@drawable/on"
+            android:fontFamily="@font/rubik_wet_paint"
+            android:paddingBottom="10dp"
             android:text="Пуск"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonPause"
-            android:layout_width="173dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/pauseButton"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/on"
+            android:fontFamily="@font/rubik_wet_paint"
+            android:paddingBottom="10dp"
             android:text="Пауза"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonStop"
-            android:layout_width="176dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/stopButton"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/on"
+            android:fontFamily="@font/rubik_wet_paint"
+            android:paddingBottom="10dp"
             android:text="Стоп"
-            android:textColor="@color/white" />
-
+            android:textColor="@color/white"
+            android:textSize="30sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

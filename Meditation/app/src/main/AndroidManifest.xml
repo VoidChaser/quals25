@@ -11,14 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Meditation">
         <activity
+            android:name=".MediaPlayer"
+            android:exported="false" />
+        <activity
             android:name=".CounterActivity"
             android:exported="false" />
         <activity
             android:name=".RandomNumberActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Splashscreen"
+            android:noHistory="true"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,15 +31,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VideoPlayerActivity"
-            android:exported="false" />
-        <activity
             android:name=".Profile"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask" />
+        <activity android:name=".MainMenuActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

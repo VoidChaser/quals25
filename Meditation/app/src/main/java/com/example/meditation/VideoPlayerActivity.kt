@@ -1,193 +1,65 @@
-
 package com.example.meditation
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.view.SurfaceHolder
-import android.view.SurfaceView
+import android.os.CountDownTimer
 import android.widget.Button
-import android.widget.SeekBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.MediaController
+import android.widget.ProgressBar
+import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import java.io.IOException
-import java.util.concurrent.TimeUnit
+import androidx.core.net.toUri
 
-import androidx.appcompat.widget.AppCompatButton
-class VideoPlayerActivity : AppCompatActivity(), SurfaceHolder.Callback {
-    private val videoFileName = "video1.mp4"
-    private lateinit var surfaceView: SurfaceView
-    private var mediaPlayer: MediaPlayer? = null
-    private var videoPath: String? = null
-    private lateinit var seekBar: SeekBar
-    private lateinit var textViewCurrentTime: TextView
-    private lateinit var textViewTotalTime: TextView
-    private lateinit var buttonPlay: AppCompatButton
-    private lateinit var buttonPause: AppCompatButton
-    private lateinit var buttonStop: AppCompatButton
-    private lateinit var textViewTitle: TextView
-    private var handler = Handler()
-    private var runnable: Runnable? = null
-
+class MediaActivity : AppCompatActivity() {
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_player)
 
-        surfaceView = findViewById(R.id.surfaceView)
-        seekBar = findViewById(R.id.seekBar)
-        textViewCurrentTime = findViewById(R.id.textViewCurrentTime)
-        textViewTotalTime = findViewById(R.id.textViewTotalTime)
-        buttonPlay = findViewById(R.id.buttonPlay)
-        buttonPause = findViewById(R.id.buttonPause)
-        buttonStop = findViewById(R.id.buttonStop)
-        textViewTitle = findViewById(R.id.textViewTitle)
+        mediaPlayer = MediaPlayer.create(this, R.raw.sleepy_beat)
 
-        // Задаём текст кнопок на русском
-        buttonPlay.text = "Воспроизвести"
-        buttonPause.text = "Пауза"
-        buttonStop.text = "Стоп"
+        // Настройка видеоплеера
+        val videoView = findViewById<VideoView>(R.id.videoView)
+        val mediaController = MediaController(this)
+        mediaController.setAnchorView(videoView)
+        videoView.setMediaController(mediaController)
+        videoView.setVideoURI("android.resource://$packageName/${R.raw.vampire_soulviewy_cat}".toUri())
 
-
-        surfaceView.holder.addCallback(this)
-        videoPath = intent.getStringExtra("videoPath")
-
-//        val videoName = videoPath?.substringBeforeLast(".") ?: "Без названия" // Получаем имя файла без расширения
-//        textViewTitle.text = "Видеоплеер: $videoName"
-        textViewTitle.text = "Видео"
-
-
-        buttonPlay.setOnClickListener {
-            if (mediaPlayer?.isPlaying == false) {
-                mediaPlayer?.start()
-                updateSeekBar()
-                updateButtonUI()
-            }
+        // Обработчики кнопок аудио
+        findViewById<Button>(R.id.playButton).setOnClickListener {
+            mediaPlayer.start()
+            updateProgressBar()
         }
 
-        buttonPause.setOnClickListener {
-            if (mediaPlayer?.isPlaying == true) {
-                mediaPlayer?.pause()
-                updateButtonUI()
-            }
+        findViewById<Button>(R.id.pauseButton).setOnClickListener {
+            mediaPlayer.pause()
         }
 
-        buttonStop.setOnClickListener {
-            stopPlayback()
-            finish()
+        findViewById<Button>(R.id.stopButton).setOnClickListener {
+            mediaPlayer.stop()
+            mediaPlayer.prepare()
+            findViewById<ProgressBar>(R.id.audioProgressBar).progress = 0
         }
     }
 
-    override fun surfaceCreated(holder: SurfaceHolder) {
-        try {
-            mediaPlayer = MediaPlayer()
-            mediaPlayer?.setDisplay(holder)
+    private fun updateProgressBar() {
+        val progressBar = findViewById<ProgressBar>(R.id.audioProgressBar)
+        progressBar.max = mediaPlayer.duration
 
-            val afd = assets.openFd(videoFileName)
-            mediaPlayer?.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
-            afd.close()
-
-            mediaPlayer?.prepare()
-
-            val duration = mediaPlayer?.duration ?: 0
-            textViewTotalTime.text = millisecondsToTimer(duration.toLong())
-            seekBar.max = duration
-
-            mediaPlayer?.setOnPreparedListener { mp ->
-                // Видео не стартует сразу
-                updateSeekBar()
-                updateButtonUI()
+        object : CountDownTimer(mediaPlayer.duration.toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                progressBar.progress = mediaPlayer.currentPosition
             }
 
-            mediaPlayer?.setOnCompletionListener {
-                stopPlayback()
-                finish()
+            override fun onFinish() {
+                progressBar.progress = mediaPlayer.duration
             }
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Toast.makeText(this, "Ошибка открытия видеофайла: ${e.message}", Toast.LENGTH_LONG).show()
-            finish()
-        }
+        }.start()
     }
-
-
-
-    private fun updateSeekBar() {
-        runnable = Runnable {
-            val currentPosition = mediaPlayer?.currentPosition ?: 0
-            textViewCurrentTime.text = millisecondsToTimer(currentPosition.toLong())
-            seekBar.progress = currentPosition
-            handler.postDelayed(runnable!!, 1000)
-        }
-        handler.postDelayed(runnable!!, 1000)
-    }
-
-
-    private fun millisecondsToTimer(milliseconds: Long): String {
-        val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds) % TimeUnit.HOURS.toMinutes(1)
-        val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds) % TimeUnit.MINUTES.toSeconds(1)
-
-        return String.format("%02d:%02d", minutes, seconds)
-    }
-
-    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        // Not needed
-    }
-
-    override fun surfaceDestroyed(holder: SurfaceHolder) {
-        stopPlayback()
-    }
-
-    private fun updateButtonUI() {
-        if (mediaPlayer?.isPlaying == true) {
-            // Кнопка "Воспроизвести" становится серой
-            buttonPlay.isEnabled = false
-            buttonPlay.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray))
-            // Кнопка "Пауза" становится активной
-            buttonPause.isEnabled = true
-            buttonPause.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light))
-
-            buttonPlay.text = "Воспроизвести" // Явное задание текста
-            buttonPause.text = "Пауза" // Явное задание текста
-
-        } else {
-            // Кнопка "Воспроизвести" становится активной
-            buttonPlay.isEnabled = true
-            buttonPlay.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light))
-            // Кнопка "Пауза" становится серой
-            buttonPause.isEnabled = false
-            buttonPause.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray))
-
-            buttonPlay.text = "Воспроизвести" // Явное задание текста
-            buttonPause.text = "Пауза" // Явное задание текста
-        }
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-        mediaPlayer?.pause()
-        updateButtonUI()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mediaPlayer?.start()
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()
-        stopPlayback()
-        handler.removeCallbacks(runnable!!)
-    }
-
-    private fun stopPlayback() {
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        mediaPlayer.release()
     }
 }
