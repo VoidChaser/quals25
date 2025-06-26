@@ -17,14 +17,14 @@ class MediaPlayer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_player)
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.sleepy_beat)
+        mediaPlayer = MediaPlayer.create(this, R.raw.zudwa)
 
         // Настройка видеоплеера
         val videoView = findViewById<VideoView>(R.id.videoView)
         val mediaController = MediaController(this)
         mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
-        videoView.setVideoURI("android.resource://$packageName/${R.raw.vampire_soulviewy_cat}".toUri())
+        videoView.setVideoURI("android.resource://$packageName/${R.raw.lifecouldbedream}".toUri())
 
         // Обработчики кнопок аудио
         findViewById<Button>(R.id.playButton).setOnClickListener {
